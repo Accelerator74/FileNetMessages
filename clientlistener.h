@@ -42,23 +42,17 @@ public:
 
 public:
 	#if SOURCE_ENGINE < SE_LEFT4DEAD
-		void FileRequested(const char *fileName, unsigned int transferID);
 		void FileReceived(const char *fileName, unsigned int transferID);
 		void FileDenied(const char *fileName, unsigned int transferID);
-		void FileSent(const char *fileName, unsigned int transferID);
 	#else
-		void FileRequested(const char *fileName, unsigned int transferID, bool isReplayDemoFile);
 		void FileReceived(const char *fileName, unsigned int transferID, bool isReplayDemoFile);
 		void FileDenied(const char *fileName, unsigned int transferID, bool isReplayDemoFile);
-		void FileSent(const char *fileName, unsigned int transferID, bool isReplayDemoFile);
 	#endif
 
 private:
 	bool m_IsHooked;
-	int m_FRequestedHookID;
 	int m_FReceivedHookID;
 	int m_FDeniedHookID;
-	int m_FSentHookID;
 };
 
 

@@ -26,26 +26,12 @@
 #include "extension.h"
 #include "clientlistener.h"
 
+/* Linking extension */
+FileNetMessagesExtension g_FileNetMessagesExtension;
+SMEXT_LINK(&g_FileNetMessagesExtension);
 
 IForward* g_hReceived;
-IForward* g_hRequested;
 IForward* g_hDenied;
-IForward* g_hSent;
-
-
-
-
-// Natives
-sp_nativeinfo_t filenetmessages_natives[] =
-{
-	{"FNM_SendFile",    FileNetMessages_SendFile},
-	{"FNM_RequestFile", FileNetMessages_RequestFile},
-	{NULL, NULL}
-};
-
-
-
-
 
 /**
  * This is called after the initial loading sequence has been processed.
@@ -65,18 +51,14 @@ bool FileNetMessagesExtension::SDK_OnLoad(char *error, size_t err_max, bool late
 
 	/* Add the forwards */
 	g_hReceived = forwards->CreateForward("FNM_OnFileReceived", ET_Ignore, 3, NULL, Param_Cell, Param_String, Param_Cell);
-	g_hRequested = forwards->CreateForward("FNM_OnFileRequested", ET_Event, 3, NULL, Param_Cell, Param_String, Param_Cell);
 	g_hDenied = forwards->CreateForward("FNM_OnFileDenied", ET_Ignore, 3, NULL, Param_Cell, Param_String, Param_Cell);
-	g_hSent = forwards->CreateForward("FNM_OnFileSent", ET_Ignore, 3, NULL, Param_Cell, Param_String, Param_Cell);
 
 	/* Now register the extension */
 	sharesys->RegisterLibrary(myself, "filenetmessages");
 
-
 	/* LOADED :) */
 	return true;
 }
-
 
 
 
@@ -88,9 +70,7 @@ void FileNetMessagesExtension::SDK_OnUnload()
 	playerhelpers->RemoveClientListener(&g_hClientListener);
 
 	forwards->ReleaseForward(g_hReceived);
-	forwards->ReleaseForward(g_hRequested);
 	forwards->ReleaseForward(g_hDenied);
-	forwards->ReleaseForward(g_hSent);
 
 	g_hClientListener.Shutdown();
 }
@@ -159,7 +139,10 @@ cell_t FileNetMessages_RequestFile(IPluginContext *pContext, const cell_t *param
 
 
 
-
-/* Linking extension */
-FileNetMessagesExtension g_FileNetMessagesExtension;
-SMEXT_LINK(&g_FileNetMessagesExtension);
+// Natives
+sp_nativeinfo_t filenetmessages_natives[] =
+{
+	{"FNM_SendFile",    	FileNetMessages_SendFile},
+	{"FNM_RequestFile", 	FileNetMessages_RequestFile},
+	{NULL, 			NULL}
+};

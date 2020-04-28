@@ -56,13 +56,9 @@ public:
 
 
 extern IForward* g_hReceived;
-extern IForward* g_hRequested;
 extern IForward* g_hDenied;
-extern IForward* g_hSent;
 
-
-cell_t FileNetMessages_SendFile(IPluginContext *pContext, const cell_t *params);
-cell_t FileNetMessages_RequestFile(IPluginContext *pContext, const cell_t *params);
+extern sp_nativeinfo_t filenetmessages_natives[];
 
 
 #endif
