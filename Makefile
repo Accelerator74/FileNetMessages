@@ -143,7 +143,7 @@ LINK += -m32 -ldl -lm
 CFLAGS += -DPOSIX -Dstricmp=strcasecmp -D_stricmp=strcasecmp -D_strnicmp=strncasecmp -Dstrnicmp=strncasecmp \
 	-D_snprintf=snprintf -D_vsnprintf=vsnprintf -D_alloca=alloca -Dstrcmpi=strcasecmp \
 	-Wno-switch -Wall -Werror -mfpmath=sse -msse -DSOURCEMOD_BUILD -DHAVE_STDINT_H -m32
-CPPFLAGS += -Wno-non-virtual-dtor -Wno-delete-non-virtual-dtor -Wno-overloaded-virtual -Wno-deprecated-register -fno-exceptions -fno-rtti -fno-threadsafe-statics
+CPPFLAGS += -Wno-non-virtual-dtor -Wno-delete-non-virtual-dtor -Wno-overloaded-virtual -Wno-deprecated-register -fno-exceptions -fno-rtti
 
 ################################################
 ### DO NOT EDIT BELOW HERE FOR MOST PROJECTS ###
